@@ -6,9 +6,11 @@ export default function Home() {
   const [data, setData] = useState([]);
   const [year, setYear] = useState('');
   const [inputYear, setInputYear] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10); // จำนวนรายการต่อหน้า
 
-   // ตั้งค่า inputYear เป็นปีปัจจุบันเมื่อหน้าโหลด
-   useEffect(() => {
+  // ตั้งค่า inputYear เป็นปีปัจจุบันเมื่อหน้าโหลด
+  useEffect(() => {
     const currentYear = new Date().getFullYear();
     setInputYear(currentYear);
     setYear(currentYear); // ทำการดึงข้อมูลสำหรับปีปัจจุบันโดยอัตโนมัติ
@@ -17,13 +19,31 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       if (year) {
-        const res = await fetch(`/api/data?year=${year}`);
-        const result = await res.json();
-        setData(result);
+        try {
+          const res = await fetch(`/api/data?year=${year}`);
+          if (!res.ok) throw new Error("Network response was not ok");
+          const result = await res.json();
+          setData(result);
+        } catch (error) {
+          console.error("Failed to fetch data:", error);
+        }
       }
     }
     fetchData();
   }, [year]);
+
+  const years = Array.from({ length: 30 }, (_, i) => 2024 - i); // สร้างรายการปี
+
+  // คำนวณข้อมูลที่จะแสดงในแต่ละหน้า
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+  // คำนวณจำนวนหน้าทั้งหมด
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+
+  // เปลี่ยนหน้า
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleYearChange = (e) => {
     setInputYear(e.target.value);
@@ -32,6 +52,7 @@ export default function Home() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setYear(inputYear);
+    setCurrentPage(1); // รีเซ็ตหน้าเป็น 1 เมื่อเปลี่ยนปี
   };
 
   return (
@@ -39,8 +60,12 @@ export default function Home() {
       <h1>Data from MongoDB</h1>
       <form onSubmit={handleSubmit}>
         <label>
-          Enter Year:
-          <input type="number" value={inputYear} onChange={handleYearChange} />
+          Select Year:
+          <select value={inputYear} onChange={handleYearChange}>
+            {years.map(year => (
+              <option key={year} value={year}>{year}</option>
+            ))}
+          </select>
         </label>
         <button type="submit">Fetch Data</button>
       </form>
@@ -64,20 +89,17 @@ export default function Home() {
             <th>m10</th>
             <th>m11</th>
             <th>m12</th>
-
           </tr>
         </thead>
         <tbody>
-          {data.length > 0 ? (
-            data.map((item, index) => (
+          {currentItems.length > 0 ? (
+            currentItems.map((item, index) => (
               <tr key={index}>
                 <td>{item.uniqueid}</td>
                 <td>{item.activityid}</td>
                 <td>{item.year}</td>
-             
                 <td>{typeof item.pastworkyear === 'number' ? item.pastworkyear.toFixed(2) : 'N/A'}</td>
                 <td>{typeof item.target === 'number' ? item.target.toFixed(2) : 'N/A'}</td>
-              
                 <td>{typeof item.m1 === 'number' ? item.m1.toFixed(2) : 'N/A'}</td>
                 <td>{typeof item.m2 === 'number' ? item.m2.toFixed(2) : 'N/A'}</td>
                 <td>{typeof item.m3 === 'number' ? item.m3.toFixed(2) : 'N/A'}</td>
@@ -90,18 +112,38 @@ export default function Home() {
                 <td>{typeof item.m10 === 'number' ? item.m10.toFixed(2) : 'N/A'}</td>
                 <td>{typeof item.m11 === 'number' ? item.m11.toFixed(2) : 'N/A'}</td>
                 <td>{typeof item.m12 === 'number' ? item.m12.toFixed(2) : 'N/A'}</td>
-
-               
-                         
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="5">No data found for the selected year</td>
+              <td colSpan="17">No data found for the selected year</td>
             </tr>
           )}
         </tbody>
       </table>
+      <div className="pagination">
+        <button
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        {[...Array(totalPages)].map((_, index) => (
+          <button
+            key={index}
+            onClick={() => paginate(index + 1)}
+            className={index + 1 === currentPage ? 'active' : ''}
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button
+          onClick={() => paginate(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 }
