@@ -32,7 +32,7 @@ export default function Home() {
     fetchData();
   }, [year]);
 
-  const years = Array.from({ length: 30 }, (_, i) => 2024 - i); // สร้างรายการปี
+  const years = Array.from({ length: 5 }, (_, i) => 2024 - i); // สร้างรายการปี
 
   // คำนวณข้อมูลที่จะแสดงในแต่ละหน้า
   const indexOfLastItem = currentPage * itemsPerPage;
