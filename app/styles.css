@@ -1,0 +1,25 @@
+/* styles/styles.css */
+.data-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: smaller;
+  }
+  
+  .data-table th, .data-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .data-table th {
+    background-color: rgb(101, 124, 187);
+    text-align: center;
+  }
+  
+  .data-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .data-table tr:hover {
+    background-color: #ddd;
+  }
+  
