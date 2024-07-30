@@ -3,6 +3,7 @@
     border-collapse: collapse;
     width: 100%;
     font-size: smaller;
+    margin-top: 1rem;
   }
   
   .data-table th, .data-table td {
@@ -15,11 +16,42 @@
     text-align: center;
   }
   
-  .data-table tr:nth-child(even) {
+  /* .data-table tr:nth-child(even) {
     background-color: #f9f9f9;
-  }
+  } */
   
   .data-table tr:hover {
     background-color: #ddd;
+  }
+
+  .container{
+    padding: 5px 5px 5px 10px;
+  }
+  
+  button {
+    border-radius: 0.5rem;
+    background-color: rgb(101, 101, 226);
+    color: white;
+    padding: 0.5rem 1rem;
+    font-size: 0.7rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  
+  button:hover {
+    background-color: darkblue;
+    transform: scale(1.05);
+  }
+  
+  button:active {
+    background-color: navy;
+    transform: scale(1);
+  }
+
+  .pagination button.active {
+    background-color: orange;
+    color: white;
   }
   
