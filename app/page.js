@@ -66,7 +66,8 @@ export default function Home() {
 
   return (
     <div className='container'>
-      <h1>Data from MongoDB</h1>
+      <h1>BPP-KPI</h1><br></br>
+      <p>Data from MongoDB</p>
       {/* <form onSubmit={handleSubmit}>
         <label>
           เลือกปี :
