@@ -7,10 +7,9 @@ export default function Home() {
   const [year, setYear] = useState('');
   const [inputYear, setInputYear] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(10); // จำนวนรายการต่อหน้า
+  const [itemsPerPage] = useState(15); // จำนวนรายการต่อหน้า
 
  
-
   // ตั้งค่า inputYear เป็นปีปัจจุบันเมื่อหน้าโหลด
   useEffect(() => {
     const currentYear = new Date().getFullYear();
@@ -47,39 +46,17 @@ export default function Home() {
   // เปลี่ยนหน้า
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  // const handleYearChange = (e) => {
-  //   setInputYear(e.target.value);
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setYear(inputYear);
-  //   setCurrentPage(1); // รีเซ็ตหน้าเป็น 1 เมื่อเปลี่ยนปี
-  // };
-
   const handleYearChange = (event) =>{
     const selectedYear = event.target.value;
     setInputYear(selectedYear);
     setYear(selectedYear);
-    setCurrentPage(1);
+    setCurrentPage(1); //รีเซ็ตหน้าเป็น 1 เมื่อเปลี่ยนปี
   };
 
   return (
     <div className='container'>
-      <h1>BPP-KPI</h1><br></br>
-      <p>Data from MongoDB</p>
-      {/* <form onSubmit={handleSubmit}>
-        <label>
-          เลือกปี :
-          <select value={inputYear} onChange={handleYearChange}>
-            {years.map(year => (
-              <option key={year} value={year}>{year}</option>
-            ))}
-          </select>
-        </label>
-        <button type="submit">ยืนยันการเลือก</button>
-
-      </form> */}
+      <h1>BPP</h1>
+      <p>KPI Data from MongoDB</p>
 
       <div>
         <label>
@@ -98,6 +75,7 @@ export default function Home() {
             {/* <th>Unique ID</th> */}
             <th>ID</th>
             <th>Year</th>
+            <th>Activity</th>
             <th>Past Year</th>
             <th>Target</th>
             <th>m1</th>
@@ -121,6 +99,7 @@ export default function Home() {
                 {/* <td>{item.uniqueid}</td> */}
                 <td>{item.activityid}</td>
                 <td>{item.year}</td>
+                <td>{item.activity_info.activity}</td>
                 <td>{typeof item.pastworkyear === 'number' ? item.pastworkyear.toFixed(2) : ''}</td>
                 <td>{typeof item.target === 'number' ? item.target.toFixed(2) : ''}</td>
                 <td>{typeof item.m1 === 'number' ? item.m1.toFixed(2) : ''}</td>
