@@ -54,6 +54,12 @@ export default function Home() {
   };
 
   return (
+    <>
+     <head>
+        <title>KPI</title>
+        <meta name="KPI" content="KPI FROM BPP" />
+      </head>
+
     <div className='container'>
       <h1>BPP</h1>
       <p>KPI Data from MongoDB</p>
@@ -147,5 +153,6 @@ export default function Home() {
         </button>
       </div>
     </div>
+    </>
   );
 }
