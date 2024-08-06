@@ -10,10 +10,15 @@
     border: 1px solid #ddd;
     padding: 8px;
   }
+
+  .data-table td{
+    text-align: right;
+  }
   
   .data-table th {
     background-color: rgb(101, 124, 187);
     text-align: center;
+    color: azure;
   }
   
   /* .data-table tr:nth-child(even) {
@@ -24,9 +29,6 @@
     background-color: #ddd;
   }
 
-  .container{
-    padding: 5px 5px 5px 10px;
-  }
   
   button {
     border-radius: 0.5rem;
@@ -53,5 +55,15 @@
   .pagination button.active {
     background-color: orange;
     color: white;
+  }
+  
+  .year-right{
+  
+    align-items: end;
+    justify-content: end;
+  }
+
+  .empty-cell {
+    background-color: pink; /* เปลี่ยนสีพื้นหลังเป็นสีชมพู */
   }
   
