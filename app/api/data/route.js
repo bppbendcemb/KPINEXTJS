@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { MongoClient } from 'mongodb';
 
 //const uri = "mongodb+srv://bendcemb:xjQBtoqvwh9UQcJc@cluster0.a9cjh0u.mongodb.net/?authMechanism=DEFAULT";
+
+//ใช้ .env
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
