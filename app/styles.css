@@ -1,7 +1,7 @@
 /* styles/styles.css */
 .data-table {
     border-collapse: collapse;
-    width: 100%;
+    /* width: 100%; */
     font-size: smaller;
     margin-top: 1rem;
   }
@@ -57,12 +57,6 @@
     color: white;
   }
   
-  .year-right{
-  
-    align-items: end;
-    justify-content: end;
-  }
-
   .empty-cell {
     background-color: pink; /* เปลี่ยนสีพื้นหลังเป็นสีชมพู */
   }

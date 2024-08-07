@@ -17,6 +17,7 @@ export default function Home() {
     const currentYear = new Date().getFullYear();
     setInputYear(currentYear);
     setYear(currentYear); // ทำการดึงข้อมูลสำหรับปีปัจจุบันโดยอัตโนมัติ
+    document.title = "KPI";
   }, []);
 
   useEffect(() => {
@@ -58,13 +59,7 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>KPI</title>
-        <meta name="KPI" content="KPI FROM BPP" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <div className="container" style={{ marginTop: 20 }}>
+      <div className="container">
         <div>
           <h1 className="item-center">BPP</h1>
 
@@ -95,7 +90,7 @@ export default function Home() {
               Next
             </button>
           </div>
-          <div className="year-right">
+          <div>
             <label>
               เลือกปี :
               <select value={inputYear} onChange={handleYearChange}>
