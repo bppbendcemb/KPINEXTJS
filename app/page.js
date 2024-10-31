@@ -60,7 +60,7 @@ export default function Home() {
       <div className="container">
         <div>
           <h1 className="item-center">BPP</h1>
-          <p className="item-center">KPI Data from MongoDBXXXXXXXXXX</p>
+          <p className="item-center">KPI Data from MongoDBXXXXXXXXX</p>
         </div>
 
         <div
